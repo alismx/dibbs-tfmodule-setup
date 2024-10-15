@@ -41,7 +41,7 @@ fi
 
 if ! grep -q "project" "$WORKSPACE.tfvars"; then
     read -p "What is this project called? ( default=dibbs ): " project_choice
-    project_choice=${project_choice:-dibbs}
+    project_choice=${project_choice:-dibbs-ce}
     echo "project = \"$project_choice\"" >> "$WORKSPACE.tfvars"
 fi
 
@@ -109,6 +109,3 @@ echo "terraform {
         -backend-config "region=$REGION" \
         || (echo "terraform init failed, exiting..." && exit 1)
 fi
-
-
-    # terraform init -var-file="tfstate.tfvars" -migrate-state -backend-config "encrypt=true" -backend-config "key=setup_tfstate" -backend-config "bucket=arn:aws:s3:::alis-tfstate-alis-o2w6kouo" -backend-config "dynamodb_table=arn:aws:dynamodb:us-east-1:339712971032:table/alis-tfstate-lock-alis-o2w6kouo" -backend-config "region=us-east-1"
